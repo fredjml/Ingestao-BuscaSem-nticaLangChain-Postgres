@@ -14,7 +14,7 @@ Data de abertura: 2026-09-04. Regra do kit: conflito material recebe owner e dec
 | DEC-08 | Publicação em repo público GitHub (INC-12) | A: fork público do template. B: repo público novo | — | operador | **FECHADA 2026-09-04 → A** (fork público) — a autorização de push/publicação será pedida just-in-time no Passo 9 |
 | DEC-09 | Bind da porta do Postgres no compose (INC-15, T-05) — template publica `5432:5432` em todas as interfaces | A: restringir a `127.0.0.1:5432:5432`. B: manter template | — | operador | **FECHADA 2026-09-04 → A** (`127.0.0.1:5432:5432` — desvio registrado do template) |
 
-**Todas as 9 decisões FECHADAS em 2026-09-04.** Gates 1 e 2 desbloqueados. **Gate 0: GO** (Python 3.12.10 + Docker daemon 29.6.2 ativos em 2026-09-04). **Fatia A1 commitada** (`08bafc4`).
+**Todas as 9 decisões FECHADAS em 2026-09-04.** Gates 1 e 2 desbloqueados. **Gate 0: GO** (Python 3.12.10 + Docker daemon 29.6.2 ativos em 2026-09-04). **Fatia A1 commitada** (`08bafc4`) e **publicada antecipadamente** (autorização explícita do owner) em `github.com/fredjml/Ingestao-BuscaSem-nticaLangChain-Postgres` (commit de merge `55a50c7`, verificado via `git ls-remote`). Publicação incremental autorizada para as próximas fatias; **entrega formal (Passo 9/Gate 7) segue pendente** até Gates 4/5/6 fecharem.
 
 ## Como fechar
 

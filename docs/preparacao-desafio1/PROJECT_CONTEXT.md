@@ -8,7 +8,7 @@
 - **Estado probatório**: **offline/estático**. Comandos executados: apenas verificações de versão read-only (registradas em [02-PRE-FLIGHT.md](02-PRE-FLIGHT.md)). Nenhum número de relatório antigo é usado como fato.
 - **Decisão vigente e motivo**: pacote de preparação gerado antes de qualquer código. **Todas as 9 DECs FECHADAS** (2026-09-04): provider selecionável via env; fork do template; PDF do template (demo) + sintético (fixture); Python 3.12; pgvector pg17; drop/create por ingestão; envio a API externa autorizado; fork público na entrega; bind 127.0.0.1. Gates 1/2 fechados; Gate 0 de implementação pendente de ambiente.
 - **Arquivos alterados**: somente dentro de `docs/preparacao-desafio1/`. Nada fora desta pasta foi criado/modificado.
-- **Último comando/resultado**: fatia A1 **commitada** (`08bafc4`) — clone do template + desvios autorizados aplicados. Python 3.12.10 + pip 26.1.2 instalados; Docker daemon 29.6.2 ativo; pre-flight **GO**.
+- **Último comando/resultado**: **fatia A2 commitada e publicada** (`374390e`) — `ingest.py` implementado (TDD: 8 testes vermelho→verde, 0 chamadas de rede) via assinatura real de `PGVector.from_documents` introspectada (não suposta). `pip-audit` **NE** (bug de encoding UTF-8 do path do Windows com acentos — limitação de ambiente, não do código).
 - **Evidência**: leitura do enunciado + saída de terminal do pre-flight. Sanitizada por natureza (sem PII, secrets ou logs de serviço).
 - **Bloqueio/owner**:
   - Owner do desafio (produto): **operador humano** — DEC-01/02/05/07 assinadas em 2026-09-04.
@@ -16,6 +16,6 @@
   - Owner de credenciais (OpenAI/Google API keys): **pendente** — nunca colar valores no chat.
   - Owner de infra (instalar Python, iniciar Docker daemon): **pendente**.
 - **Autorização vigente e limites**: **somente leitura/documentação nesta pasta**. Vetado: instalação, código, execução de serviços, live, commit/push, dado real.
-- **Próximo passo único**: Fase B — fatia **A2** (implementar `ingest.py`: load PDF → split 1000/150 → embed → PGVector, com drop/create da coleção). Autorização just-in-time por fatia via [13-PROMPTS.md](13-PROMPTS.md) §Passo 5.
+- **Próximo passo único**: Fase B — fatia **B1** (implementar `src/search.py`: vetorizar pergunta + `similarity_search_with_score(k=10)`). Autorização just-in-time por fatia via [13-PROMPTS.md](13-PROMPTS.md) §Passo 5.
 - **Links para detalhes**: [ANALYSIS](01-ANALYSIS.md), [PRD](05-PRD.md), [REQUIREMENTS](06-REQUIREMENTS.md), [TDD](08-TDD.md), [THREAT MODEL](09-THREAT-MODEL.md), [PLAN](11-IMPLEMENTATION-PLAN.md), [PROMPTS](13-PROMPTS.md).
 - **Não reler, salvo mudança**: fontes citadas em [00-MAPA-ORIGENS.md](00-MAPA-ORIGENS.md).

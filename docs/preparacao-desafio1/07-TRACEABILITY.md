@@ -4,11 +4,11 @@ Data: 2026-09-04. Estados: **NE**=não executado, INC=inconclusivo, FAIL, OK. Mo
 
 | ID | Fonte | Artefato | Implementação (prevista) | Teste/modo | Resultado | Evidência | Entrega | Owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| RF-ING-01 | enunciado §Req1 | `src/ingest.py` | — | unit (double loader) + live local | NE | EV-02 | local | pendente |
-| RF-ING-02 | enunciado §Req1 | `src/ingest.py` | — | unit (assert 1000/150) | NE | EV-05 | local | pendente |
-| RF-ING-03 | enunciado §Tec | `src/ingest.py` | — | unit (double embeddings) | NE | EV-05 | local | pendente |
-| RF-ING-04 | enunciado §Req1 | `src/ingest.py` | — | live local (contagem no PG) | NE | EV-02 | local | pendente |
-| RF-ING-05 | INC-09 | `src/ingest.py` | — | live local (2ª execução) | NE | EV-02 | local | pendente (DEC-06) |
+| RF-ING-01 | enunciado §Req1 | `src/ingest.py` | fatia A2 (`374390e`) | unit (double loader, via orquestração) | OK | pytest 8/8 verde | local | fred |
+| RF-ING-02 | enunciado §Req1 | `src/ingest.py` | fatia A2 (`374390e`) | unit (assert 1000/150) | OK | `test_split_documents_uses_1000_150` | local | fred |
+| RF-ING-03 | enunciado §Tec | `src/ingest.py` | fatia A2 (`374390e`) | unit (double embeddings, sem rede) | OK | `test_get_embeddings_openai_default` + `_gemini` | local | fred |
+| RF-ING-04 | enunciado §Req1 | `src/ingest.py` | fatia A2 (`374390e`) | unit (mock PGVector.from_documents) | OK | `test_build_vector_store_uses_pre_delete_collection` | local | fred |
+| RF-ING-05 | INC-09 | `src/ingest.py` | fatia A2 (`374390e`) | unit (assert pre_delete_collection=True) | OK | idem acima (DEC-06 verificado) | local | fred |
 | RF-QRY-01 | enunciado §CLI | `src/chat.py` | — | live local | NE | EV-03/EV-04 | local | pendente |
 | RF-QRY-02 | enunciado §CLI | `src/search.py` | — | unit (double) | NE | EV-05 | local | pendente |
 | RF-QRY-03 | enunciado §Busca | `src/search.py` | — | unit (double k=10) + live | NE | EV-05/EV-03 | local | pendente |
