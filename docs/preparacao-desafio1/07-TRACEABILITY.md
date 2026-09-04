@@ -10,11 +10,11 @@ Data: 2026-09-04. Estados: **NE**=não executado, INC=inconclusivo, FAIL, OK. Mo
 | RF-ING-04 | enunciado §Req1 | `src/ingest.py` | fatia A2 (`374390e`) | unit (mock PGVector.from_documents) | OK | `test_build_vector_store_uses_pre_delete_collection` | local | fred |
 | RF-ING-05 | INC-09 | `src/ingest.py` | fatia A2 (`374390e`) | unit (assert pre_delete_collection=True) | OK | idem acima (DEC-06 verificado) | local | fred |
 | RF-QRY-01 | enunciado §CLI | `src/chat.py` | — | live local | NE | EV-03/EV-04 | local | pendente |
-| RF-QRY-02 | enunciado §CLI | `src/search.py` | — | unit (double) | NE | EV-05 | local | pendente |
-| RF-QRY-03 | enunciado §Busca | `src/search.py` | — | unit (double k=10) + live | NE | EV-05/EV-03 | local | pendente |
-| RF-QRY-04 | enunciado §Prompt | `src/chat.py` | — | unit (template exato) | NE | EV-05 | local | pendente |
+| RF-QRY-02 | enunciado §CLI | `src/search.py` | fatia B1 (`72df660`) | unit (double, mesmo provider da ingestão) | OK | `test_get_vector_store_usa_mesmo_provider_da_ingestao` | local | fred |
+| RF-QRY-03 | enunciado §Busca | `src/search.py` | fatia B1 (`72df660`) | unit (double k=10) + live | OK (unit) / NE (live) | `test_buscar_chama_similarity_search_with_score_k10` | local | fred |
+| RF-QRY-04 | enunciado §Prompt | `src/search.py` | fatia B1 (`72df660`) | unit (template exato) | OK | `test_montar_prompt_usa_template_com_contexto_e_pergunta` | local | fred |
 | RF-QRY-05 | enunciado §Exemplo | `src/chat.py` | — | unit (fallback) + live | NE | EV-04 | local | pendente |
-| RF-QRY-06 | enunciado §Estrutura | `src/search.py` | — | estático (import) | NE | EV-05 | local | pendente |
+| RF-QRY-06 | enunciado §Estrutura | `src/search.py` | fatia B1 (`72df660`) | estatético (import) + unit (SearchChain) | OK | `test_search_prompt_sem_pergunta_retorna_chain` | local | fred |
 | RNF-SEC-01 | enunciado+INC-04 | `.env.example`, `.gitignore` | — | estático (grep de segredos) | NE | EV-06 | local | pendente |
 | RNF-SEC-02 | kit R-SEC-01 | todos | — | review (Passo 8) | NE | — | local | pendente |
 | RNF-PRV-01 | T-03 | — (decisão) | — | DEC-07 assinada | NE | — | — | DPO/owner |
