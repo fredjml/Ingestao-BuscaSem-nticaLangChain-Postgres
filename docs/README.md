@@ -3,7 +3,7 @@
 
 Este `README.md` é a porta de entrada de tudo que vive em `docs/`. Ele descreve **o que o framework é**, **como usá-lo**, **em que ordem** e **quais controles impedem que uma sessão de IA (ou operador humano) faça mais do que deveria**.
 
-O framework foi construído a partir do repositório `MP-Trabalho/cidadania-canal-denuncias` (branch `stg`), mas é **reutilizável em qualquer projeto**: basta trocar a governança local e regenerar o pacote de preparação.
+O framework foi construído a partir do repositório Desafio FC (branch `stg`), mas é **reutilizável em qualquer projeto**: basta trocar a governança local e regenerar o pacote de preparação.
 
 ---
 
@@ -17,8 +17,8 @@ docs/
 │   ├── README.md                   ← Passos 0–11 do fluxo com princípios não negociáveis
 │   ├── 00..15-*.md                 ← controles reutilizáveis (drift, análise, gates, escalonamento, RCA, ...)
 │   ├── templates/                  ← REQUIREMENTS, ANALYSIS, THREAT, EVIDENCE, ...
-│   ├── skill/denuncias-quality-review/SKILL.md   ← skill Anthropic-style de review
-│   └── scripts/preflight-denuncias.ps1           ← pre-flight read-only
+│   ├── skill/quality-review/SKILL.md   ← skill Anthropic-style de review
+│   └── scripts/preflight.ps1           ← pre-flight read-only
 │
 ├── preparacao-implementacao/       ← PACOTE gerado para o projeto atual (Passos 0–4 + 12)
 │   ├── README.md                   ← índice + mapa Passo → artefato
@@ -30,7 +30,7 @@ docs/
 │   ├── 11-IMPLEMENTATION-PLAN.md · 12-DECISIONS.md
 │   ├── 13-PROMPTS.md               ← prompt pronto por Passo (0–12)
 │   ├── 14-PROMPTS-EXECUCAO-COM-DIAGRAMAS.md   ← versão consolidada com diagramas
-│   ├── skills/denuncias-preparacao-implementacao/SKILL.md
+│   ├── skills/preparacao-implementacao/SKILL.md
 │   └── agents/                     ← analyst-preflight, requirements-engineer,
 │                                     security-architect, evidence-planner,
 │                                     plan-decomposer, diagram-curator
@@ -41,7 +41,7 @@ docs/
 │   └── validate-diagrams.js
 │
 ├── Analises/                       ← relatórios históricos datados (fonte 2)
-└── DiagramaDenuncias*.drawio       ← draw.io sobreposto aos .mmd
+└── Diagrama*.drawio       ← draw.io sobreposto aos .mmd
 ```
 
 Precedência de fontes (regra do kit):
@@ -100,7 +100,7 @@ O framework consome **três artefatos** — não parâmetros:
 
 2. Garanta `AGENTS.md` na raiz do seu projeto com: comandos, guardrails, arquitetura, convenções, pitfalls. Sem ele, o Passo 0 para em `NÃO FOI POSSÍVEL DETERMINAR`.
 
-3. **Adapte a skill** copiando `skills/denuncias-preparacao-implementacao/SKILL.md` e ajustando só o cabeçalho YAML:
+3. **Adapte a skill** copiando `skills/preparacao-implementacao/SKILL.md` e ajustando só o cabeçalho YAML:
 
    ```yaml
    ---
@@ -109,7 +109,7 @@ O framework consome **três artefatos** — não parâmetros:
    ---
    ```
 
-   Substitua `cidadania-canal-denuncias/` → `<seu-projeto>/` na skill e nos subagentes em `agents/`.
+   Substitua `canal/` → `<seu-projeto>/` na skill e nos subagentes em `agents/`.
 
 4. **Defina o desafio** em uma linha em `PROJECT_CONTEXT.md` (ex.: "corrigir P0 de LGPD", "adicionar feature X", "migrar de fetch para HttpClient"). Isso amarra os prompts a um resultado esperado.
 
@@ -301,7 +301,7 @@ Tabela resumo:
 | Passo 9 (entrega) | comunicado de release | ❌ código; commit/push/deploy exigem autorização explícita do owner |
 | Passo 10 (RCA) | `licoesaprendidas/templates/lessons-learned.md` | ❌ leitura |
 | Passo 11 (governança) | `licoesaprendidas/templates/*.md` ou `skill/*/SKILL.md` | ❌ código do produto |
-| Passo 12.1 (`diagram-curator`) | `diagramas-mermaid/*.mmd` + `DiagramaDenuncias-sobreposto.drawio` | ❌ código do produto |
+| Passo 12.1 (`diagram-curator`) | `diagramas-mermaid/*.mmd` + `Diagrama-sobreposto.drawio` | ❌ código do produto |
 | Passo 12.2 (validador) | — | ❌ somente executa `node validate-diagrams.js` |
 
 Portanto: o único prompt que **pode** alterar código do produto é o do **Passo 5**, e mesmo assim exige owner + autorização just-in-time + fatia específica.
@@ -329,8 +329,8 @@ Portanto: o único prompt que **pode** alterar código do produto é o do **Pass
 
 | Skill | Papel | Instalação |
 | --- | --- | --- |
-| [`preparacao-implementacao/skills/denuncias-preparacao-implementacao/SKILL.md`](preparacao-implementacao/skills/denuncias-preparacao-implementacao/SKILL.md) | orquestra Passos 0–4 e 12 | referência local; opcional em `~/.claude/skills/` ou `.copilot/skills/` após auditoria |
-| [`licoesaprendidas/skill/denuncias-quality-review/SKILL.md`](licoesaprendidas/skill/denuncias-quality-review/SKILL.md) | review baseado em evidências (Passo 8) | idem |
+| [`preparacao-implementacao/skills/preparacao-implementacao/SKILL.md`](preparacao-implementacao/skills/preparacao-implementacao/SKILL.md) | orquestra Passos 0–4 e 12 | referência local; opcional em `~/.claude/skills/` ou `.copilot/skills/` após auditoria |
+| [`licoesaprendidas/skill/quality-review/SKILL.md`](licoesaprendidas/skill/quality-review/SKILL.md) | review baseado em evidências (Passo 8) | idem |
 
 Instalar uma skill em plataforma de IA aumenta superfície de risco: siga a auditoria de [`licoesaprendidas/04-ia-rules-skills-tools-mcp-agents.md`](licoesaprendidas/04-ia-rules-skills-tools-mcp-agents.md).
 
@@ -349,7 +349,7 @@ Definidos em [`preparacao-implementacao/agents/`](preparacao-implementacao/agent
 
 ### 8.3 Scripts
 
-- [`licoesaprendidas/scripts/preflight-denuncias.ps1`](licoesaprendidas/scripts/preflight-denuncias.ps1) — pre-flight read-only (não autentica, não instala).
+- [`licoesaprendidas/scripts/preflight.ps1`](licoesaprendidas/scripts/preflight.ps1) — pre-flight read-only (não autentica, não instala).
 - [`diagramas-mermaid/validate-diagrams.js`](diagramas-mermaid/validate-diagrams.js) — valida presença dos 10 `.mmd`, cabeçalhos Mermaid, ausência de tabulação e integridade do `.drawio`.
 
 ---
@@ -411,18 +411,18 @@ Se qualquer item ficar aberto, a solução **não** está "implementada" — est
 ## 12. Reutilizar em outro projeto
 
 ```powershell
-Copy-Item -Recurse f:\ProjetosMPT\denuncias2\docs\licoesaprendidas         <novo-repo>\docs\
-Copy-Item -Recurse f:\ProjetosMPT\denuncias2\docs\preparacao-implementacao <novo-repo>\docs\
-Copy-Item -Recurse f:\ProjetosMPT\denuncias2\docs\diagramas-mermaid        <novo-repo>\docs\
+Copy-Item -Recurse f:\docs\licoesaprendidas         <novo-repo>\docs\
+Copy-Item -Recurse f:\docs\preparacao-implementacao <novo-repo>\docs\
+Copy-Item -Recurse f:\docs\diagramas-mermaid        <novo-repo>\docs\
 ```
 
 Depois no destino:
 
 1. Renomeie a skill (`name:` + `description:` em `SKILL.md`).
-2. Substitua caminhos `cidadania-canal-denuncias/**` → `<seu-projeto>/**` nos subagentes e prompts.
+2. Substitua caminhos `canal/**` → `<seu-projeto>/**` nos subagentes e prompts.
 3. Regenere `PROJECT_CONTEXT.md`, `00-MAPA-ORIGENS.md` e demais artefatos executando A0–A9.
 4. Redesenhe (ou apague) os 10 `.mmd` conforme sua arquitetura; ajuste [`diagramas-mermaid/README.md`](diagramas-mermaid/README.md) se mudar padrão editorial.
-5. Ajuste [`licoesaprendidas/00-mapa-origens-baseline-drift.md`](licoesaprendidas/00-mapa-origens-baseline-drift.md) e [`15-baseline-analises-denuncias.md`](licoesaprendidas/15-baseline-analises-denuncias.md) para refletir suas fontes históricas.
+5. Ajuste [`licoesaprendidas/00-mapa-origens-baseline-drift.md`](licoesaprendidas/00-mapa-origens-baseline-drift.md) e [`15-baseline-analises.md`](licoesaprendidas/15-baseline-analises.md) para refletir suas fontes históricas.
 
 ---
 
@@ -444,7 +444,7 @@ Depois no destino:
 | --- | --- |
 | Entender o fluxo canônico | [`licoesaprendidas/README.md`](licoesaprendidas/README.md) |
 | Ver os controles e templates | [`licoesaprendidas/`](licoesaprendidas/) |
-| Rodar o pre-flight | [`licoesaprendidas/07-preflight.md`](licoesaprendidas/07-preflight.md) + [`scripts/preflight-denuncias.ps1`](licoesaprendidas/scripts/preflight-denuncias.ps1) |
+| Rodar o pre-flight | [`licoesaprendidas/07-preflight.md`](licoesaprendidas/07-preflight.md) + [`scripts/preflight.ps1`](licoesaprendidas/scripts/preflight.ps1) |
 | Iniciar um ciclo | [`preparacao-implementacao/README.md`](preparacao-implementacao/README.md) |
 | Copiar um prompt pronto | [`preparacao-implementacao/13-PROMPTS.md`](preparacao-implementacao/13-PROMPTS.md) |
 | Ver a versão consolidada com diagramas | [`preparacao-implementacao/14-PROMPTS-EXECUCAO-COM-DIAGRAMAS.md`](preparacao-implementacao/14-PROMPTS-EXECUCAO-COM-DIAGRAMAS.md) |
